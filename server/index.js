@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import authRoutes from "./routes/auth.route.js";
 import messageRoutes from "./routes/message.route.js"
+import userRoutes from "./routes/user.route.js"
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 
@@ -19,6 +20,7 @@ app.use(cookieParser())
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/message", messageRoutes)
+app.use("/api/users", userRoutes)
 
 // Default route
 app.get("/", (req, res) => {
