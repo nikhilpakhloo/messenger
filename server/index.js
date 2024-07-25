@@ -10,7 +10,7 @@ import cookieParser from "cookie-parser";
 dotenv.config();
 
 const PORT = process.env.PORT || 5000;
-const MONGO_URI = process.env.MONGODB_KEY;
+
 
 
 const app = express();
@@ -32,7 +32,7 @@ app.get("/", (req, res) => {
 
 // MongoDB connection
 mongoose
-  .connect(MONGO_URI )
+  .connect(process.env.MONGODB_KEY )
   .then(() => {
     console.log("MongoDB connected");
 
