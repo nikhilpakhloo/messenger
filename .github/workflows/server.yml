@@ -16,7 +16,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '20.15.0' 
+          node-version: '20.15.0'
 
       - name: Install dependencies
         run: |
@@ -32,17 +32,13 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Set up environment variables
-        env:
-          PORT: 4000
-          MONGODB_KEY: process.env.MONGODB_KEY
-
         run: |
-          # Set environment variables for deployment
-          echo "PORT=$PORT" >> .env
-          echo "MONGODB_KEY=$MONGODB_KEY" >> .env
+          # Create .env file with environment variables
+          echo "PORT=4000" >> server/.env
+          echo "MONGODB_KEY=${{ secrets.DB_KEY }}" >> server/.env
 
       - name: Deploy to Vercel (or start server)
         run: |
           cd server
           npm install --save-dev nodemon  # Ensure nodemon is installed
-          npm run start   
+          npm run start
