@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 5000;
 
 const app = express();
 
-// Middleware
+// Middlewares
 app.use(cors());
 app.use(express.json());
 app.use(cookieParser())
@@ -25,7 +25,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/message", messageRoutes)
 app.use("/api/users", userRoutes)
 
-// Default route
+// Default routes
 app.get("/", (req, res) => {
   res.send("Welcome to the server");
 });
