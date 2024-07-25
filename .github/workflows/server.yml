@@ -16,7 +16,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '14'  # Adjust Node.js version as needed
+          node-version: '20.15.0' 
 
       - name: Install dependencies
         run: |
@@ -40,7 +40,8 @@ jobs:
           echo "PORT=$PORT" >> .env
           echo "MONGODB_KEY=$MONGODB_KEY" >> .env
 
-      - name: Deploy to server (e.g., Heroku, AWS EC2)
+      - name: Deploy to Vercel (or start server)
         run: |
           cd server
-          npm run deploy  # Replace with your deployment command
+          npm install --save-dev nodemon  # Ensure nodemon is installed
+          npm run start   
