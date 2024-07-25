@@ -34,7 +34,8 @@ jobs:
       - name: Set up environment variables
         env:
           PORT: 4000
-          MONGODB_KEY: mongodb+srv://nikhilpakhloo:nikhilpakhloo@cluster0.1fqjaap.mongodb.net/
+          MONGODB_KEY: process.env.MONGODB_KEY
+
         run: |
           # Set environment variables for deployment
           echo "PORT=$PORT" >> .env
