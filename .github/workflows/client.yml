@@ -1,0 +1,52 @@
+name: Client CI/CD
+
+on:
+  push:
+    branches:
+      - main  # Adjust branch name as needed
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'  # Adjust Node.js version as needed
+
+      - name: Install dependencies
+        run: |
+          cd client
+          npm install
+
+      - name: Build
+        run: |
+          cd client
+          npm run build
+
+      - name: Archive production artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: client-app
+          path: client/build
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: client-app
+          path: client-build
+
+      - name: Deploy to hosting service (e.g., AWS S3, Netlify)
+        # Add your deployment steps here based on your hosting service
